@@ -8,7 +8,11 @@
     Ctrl.$inject = ['$scope'];
 
     function Ctrl($scope) {
+        $scope.exampleCenter = L.latLng(50.5, 30.5);
+        $scope.exampleZoom = 6;
+
         var callInit = function(){
+
         }
 
         callInit();

@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('angular-leaflet', [])
-        .directive('center', Directive);
+        .module('angular-leaflet')
+        .directive('tiles', Directive);
 
     function Directive() {
         var directive = {
@@ -14,8 +14,7 @@
         };
 
         function link(scope, element, attrs, controller) {
-            console.log(111);
-            console.log(scope);
+            console.log('tiles');
         }
 
         return directive;

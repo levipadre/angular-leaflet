@@ -23,7 +23,7 @@ gulp.task('scripts:app', function() {
 
 gulp.task('scripts:directive', function() {
     var files = [
-        conf.app + '/scripts/directives/*.js'
+        conf.src + '/directives/*.js'
     ];
 
     return gulp.src(files)
@@ -31,15 +31,15 @@ gulp.task('scripts:directive', function() {
         .pipe($.expectFile.real(files))
         .pipe($.concat('angular-leaflet.min.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest(conf.app + '/scripts/min'));
+        .pipe(gulp.dest(conf.dist));
 });
 
 gulp.task('watch', function() {
-    gulp.watch(conf.app + '/scripts/**/*.js', ['scripts:app', 'scripts:directive']);
+    gulp.watch(conf.src + '/directives/*.js', ['scripts:app', 'scripts:directive']);
 });
 
 gulp.task('webserver', function() {
-    gulp.src('app')
+    gulp.src('.')
         .pipe(webserver({
             livereload: true,
             port: 12345,

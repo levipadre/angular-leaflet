@@ -3,7 +3,7 @@
 
     angular
         .module('angular-leaflet')
-        .directive('maxbounds', Directive);
+        .directive('maxzoom', Directive);
 
     function Directive() {
         var directive = {
@@ -14,8 +14,7 @@
         };
 
         function link(scope, element, attrs, controller) {
-            console.log(333);
-            console.log(scope);
+            console.log('maxzoom');
         }
 
         return directive;

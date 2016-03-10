@@ -1,4 +1,4 @@
-(function(angular) {
+(function(window, angular, undefined) {
     'use strict';
 
     angular
@@ -19,4 +19,4 @@
 
         return directive;
     }
-})(window.angular);
+})(window, window.angular);

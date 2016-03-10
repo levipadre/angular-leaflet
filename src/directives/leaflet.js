@@ -1,4 +1,4 @@
-(function(angular) {
+(function(window, angular, undefined) {
     'use strict';
 
     angular
@@ -13,12 +13,12 @@
             replace: true,
             transclude: true,
             scope: {
-                center: '=',
-                zoom: '=',
-                minzoom: '=',
-                maxzoom: '=',
-                maxbounds: '=',
-                tiles: '='
+                center: '=?',
+                zoom: '=?',
+                minzoom: '=?',
+                maxzoom: '=?',
+                maxbounds: '=?',
+                tiles: '=?'
             },
             template: '<div class="angular-leaflet"><div data-ng-transclude></div></div>',
             link: link
@@ -44,4 +44,4 @@
 
         return directive;
     }
-})(window.angular);
+})(window, window.angular);

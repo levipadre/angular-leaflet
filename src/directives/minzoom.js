@@ -1,4 +1,4 @@
-(function(angular) {
+(function(window, angular, undefined) {
     'use strict';
 
     angular
@@ -10,7 +10,6 @@
             restrict: 'A',
             scope: false,
             replace: false,
-            //require: ['leaflet'],
             link: link
         };
 
@@ -20,4 +19,4 @@
 
         return directive;
     }
-})(window.angular);
+})(window, window.angular);

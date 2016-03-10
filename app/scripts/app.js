@@ -9,6 +9,8 @@
         .run(runBlock)
         .config(configure);
 
+    angular.module('app.controllers', []);
+
     runBlock.$inject = ['$rootScope', '$routeParams'];
     configure.$inject = ['$routeProvider', '$locationProvider'];
 

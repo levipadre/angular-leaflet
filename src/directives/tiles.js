@@ -10,11 +10,22 @@
             restrict: 'A',
             scope: false,
             replace: false,
+            require: 'angularLeaflet',
             link: link
         };
 
         function link(scope, element, attrs, controller) {
             console.log('tiles');
+            var tileLayerObj;
+            var leafletScope  = controller.getLeafletScope(),
+                tiles = leafletScope.tiles;
+
+            console.log(leafletScope);
+
+            //L.tileLayer(scope.tiles.url).addTo(map);
+            //if (tiles.url) {
+            //    tileLayerObj.setUrl(tiles.url);
+            //}
         }
 
         return directive;

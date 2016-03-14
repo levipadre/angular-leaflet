@@ -3,9 +3,7 @@
 
     angular
         .module('angular-leaflet')
-        .directive('leaflet', Directive);
-
-    Directive.$inject = [];
+        .directive('angularLeaflet', Directive);
 
     function Directive() {
         var directive = {
@@ -21,10 +19,15 @@
                 tiles: '=?'
             },
             template: '<div class="angular-leaflet"><div data-ng-transclude></div></div>',
+            controller: ["$scope", function controller($scope) {
+                this.getLeafletScope = function () {
+                    return $scope;
+                };
+            }],
             link: link
         };
 
-        function link(scope, element, attrs) {
+        function link(scope, element, attrs, ctrl) {
             console.log('scope');
             console.log(scope);
 
@@ -37,9 +40,9 @@
                 maxZoom: scope.maxzoom
             });
 
-            L.tileLayer(scope.tiles.url).addTo(map);
-
             L.marker([50.5, 30.5]).addTo(map);
+
+            L.tileLayer(scope.tiles.url).addTo(map);
         }
 
         return directive;

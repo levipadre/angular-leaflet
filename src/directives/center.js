@@ -10,11 +10,12 @@
             restrict: 'A',
             scope: false,
             replace: false,
+            require: 'angularLeaflet',
             link: link
         };
 
         function link(scope, element, attrs, controller) {
-            console.log('center');
+
         }
 
         return directive;

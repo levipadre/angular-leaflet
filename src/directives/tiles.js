@@ -15,17 +15,18 @@
         };
 
         function link(scope, element, attrs, controller) {
-            console.log('tiles');
-            var tileLayerObj;
-            var leafletScope  = controller.getLeafletScope(),
-                tiles = leafletScope.tiles;
+            var lScope  = controller.getLScope(),
+                tiles = lScope.tiles;
 
-            console.log(leafletScope);
+            lScope.$watch("tiles", function (tiles) {
+                var tileLayerUrl = tiles.url;
 
-            //L.tileLayer(scope.tiles.url).addTo(map);
-            //if (tiles.url) {
-            //    tileLayerObj.setUrl(tiles.url);
-            //}
+                if(tiles.options){
+                    var tileOptions = tiles.options;
+                }
+
+                L.tileLayer(tileLayerUrl, tileOptions).addTo(lScope.map);
+            }, true);
         }
 
         return directive;

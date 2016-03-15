@@ -14,7 +14,7 @@
         };
 
         function link(scope, element, attrs, controller) {
-            console.log('maxzoom');
+
         }
 
         return directive;

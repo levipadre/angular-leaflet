@@ -35,7 +35,8 @@ gulp.task('scripts:directive', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(conf.src + '/directives/*.js', ['scripts:app', 'scripts:directive']);
+    gulp.watch(conf.src + '/directives/*.js', ['scripts:directive']);
+    gulp.watch(conf.app + '/scripts/**/*.js', ['scripts:app']);
 });
 
 gulp.task('webserver', function() {
@@ -52,6 +53,6 @@ gulp.task('bower:install', function() {
     return $.bower();
 });
 
-gulp.task('default', ['webserver', 'bower:install', 'watch'], function() {
+gulp.task('default', ['webserver', 'bower:install', 'scripts:directive', 'scripts:app', 'watch'], function() {
 
 });

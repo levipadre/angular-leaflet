@@ -14,7 +14,7 @@
         };
 
         function link(scope, element, attrs, controller) {
-            console.log('maxbounds');
+
         }
 
         return directive;

@@ -66,7 +66,7 @@
         $scope.exampleCenter = L.latLng(50.5, 30.5);
         $scope.exampleZoom = 6;
         $scope.exampleMaxBounds = $scope.regions.london;
-        $scope.exampleTiles = $scope.tilesDict.mapbox;
+        $scope.exampleTiles = $scope.tilesDict.openstreetmap;
 
         var callInit = function(){
 

@@ -11,12 +11,13 @@
             replace: true,
             transclude: true,
             scope: {
+                tiles: '=?',
                 center: '=?',
+                markers: '=?',
                 zoom: '=?',
                 minzoom: '=?',
                 maxzoom: '=?',
-                maxbounds: '=?',
-                tiles: '=?'
+                maxbounds: '=?'
             },
             template: '<div class="angular-leaflet"><div data-ng-transclude></div></div>',
             controller: ["$scope", function controller($scope) {
@@ -28,20 +29,22 @@
         };
 
         function link(scope, element, attrs, ctrl) {
+            var mapID = attrs.id || 'mapId';
+
             console.log('scope');
             console.log(scope);
 
             console.log('attrs');
             console.log(attrs);
 
-            scope.map = L.map(attrs.id, {
+
+            scope.map = L.map(mapID, {
                 center: scope.center,
                 zoom: scope.zoom,
                 minZoom: scope.minzoom,
                 maxZoom: scope.maxzoom
             });
-
-            L.marker([50.5, 30.5]).addTo(scope.map);
+            return map;
         }
 
         return directive;

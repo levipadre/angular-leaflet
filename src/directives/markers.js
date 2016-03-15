@@ -3,7 +3,7 @@
 
     angular
         .module('angular-leaflet')
-        .directive('tiles', Directive);
+        .directive('markers', Directive);
 
     function Directive() {
         var directive = {
@@ -16,17 +16,17 @@
 
         function link(scope, element, attrs, controller) {
             var lScope  = controller.getLScope(),
-                tiles = lScope.tiles;
+                markers = lScope.markers;
 
-            lScope.$watch("tiles", function (tiles) {
-                var tilesUrl = tiles.url;
+            lScope.$watch("markers", function (markers) {
+                var markersCoords = [markers.lat, markers.lng];
 
-                if(tiles.options){
-                    var tilesOptions = tiles.options;
+                if(markers.options){
+                    var markersOptions = markers.options;
                 }
 
-                var tile = L.tileLayer(tilesUrl, tilesOptions);
-                tile.addTo(lScope.map);
+                var marker = new L.marker(markersCoords, markersOptions);
+                marker.addTo(lScope.map);
             }, true);
         }
 

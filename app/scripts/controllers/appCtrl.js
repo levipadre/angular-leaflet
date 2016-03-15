@@ -30,6 +30,16 @@
             }
         };
 
+        var mainMarker = {
+            lat: 50.5,
+            lng: 30.5,
+            options: {
+                focus: true,
+                message: "Hey, drag me if you want",
+                draggable: true
+            }
+        };
+
         $scope.regions = {
             london: {
                 northEast: {
@@ -67,6 +77,7 @@
         $scope.exampleZoom = 6;
         $scope.exampleMaxBounds = $scope.regions.london;
         $scope.exampleTiles = $scope.tilesDict.openstreetmap;
+        $scope.exampleMarkers = angular.copy(mainMarker);
 
         var callInit = function(){
 

@@ -23,7 +23,8 @@ gulp.task('scripts:app', function() {
 
 gulp.task('scripts:directive', function() {
     var files = [
-        conf.src + '/directives/*.js'
+        conf.src + '/directives/*.js',
+        conf.src + '/services/*.js'
     ];
 
     return gulp.src(files)
@@ -35,7 +36,7 @@ gulp.task('scripts:directive', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(conf.src + '/directives/*.js', ['scripts:directive']);
+    gulp.watch(conf.src + '/**/*.js', ['scripts:directive']);
     gulp.watch(conf.app + '/scripts/**/*.js', ['scripts:app']);
 });
 

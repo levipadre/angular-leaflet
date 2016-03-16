@@ -5,7 +5,9 @@
         .module('angular-leaflet')
         .directive('tiles', Directive);
 
-    function Directive() {
+    Directive.$inject = ['Default'];
+
+    function Directive(Default) {
         var directive = {
             restrict: 'A',
             scope: false,
@@ -18,16 +20,20 @@
             var lScope  = controller.getLScope(),
                 tiles = lScope.tiles;
 
-            lScope.$watch("tiles", function (tiles) {
-                var tilesUrl = tiles.url;
+            controller.getMap().then(function (map) {
+                var defaultMap = Default.getDefaultMap(attrs.id);
 
-                if(tiles.options){
-                    var tilesOptions = tiles.options;
-                }
+                lScope.$watch("tiles", function (tiles) {
+                    var tilesUrl = tiles.url;
 
-                var tile = L.tileLayer(tilesUrl, tilesOptions);
-                tile.addTo(lScope.map);
-            }, true);
+                    if(tiles.options){
+                        var tilesOptions = tiles.options;
+                    }
+
+                    var tile = L.tileLayer(tilesUrl, tilesOptions);
+                    tile.addTo(map);
+                }, true);
+            });
         }
 
         return directive;

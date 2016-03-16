@@ -5,7 +5,9 @@
         .module('angular-leaflet')
         .directive('angularLeaflet', Directive);
 
-    function Directive() {
+    Directive.$inject = ['$q', 'Default'];
+
+    function Directive($q, Default) {
         var directive = {
             restrict: 'EA',
             replace: true,
@@ -21,6 +23,10 @@
             },
             template: '<div class="angular-leaflet"><div data-ng-transclude></div></div>',
             controller: ["$scope", function controller($scope) {
+                this._leafletMap = $q.defer();
+                this.getMap = function () {
+                    return this._leafletMap.promise;
+                };
                 this.getLScope = function () {
                     return $scope;
                 };
@@ -29,7 +35,8 @@
         };
 
         function link(scope, element, attrs, ctrl) {
-            var mapID = attrs.id || 'mapId';
+            var defaultMap = Default.getDefaultMap();
+            var mapID =  attrs.id;
 
             console.log('scope');
             console.log(scope);
@@ -37,14 +44,13 @@
             console.log('attrs');
             console.log(attrs);
 
-
-            scope.map = L.map(mapID, {
-                center: scope.center,
+            var map = L.map(mapID, {
+                center: scope.center || defaultMap.center,
                 zoom: scope.zoom,
                 minZoom: scope.minzoom,
                 maxZoom: scope.maxzoom
             });
-            return map;
+            ctrl._leafletMap.resolve(map);
         }
 
         return directive;

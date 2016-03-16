@@ -5,7 +5,9 @@
         .module('angular-leaflet')
         .directive('markers', Directive);
 
-    function Directive() {
+    Directive.$inject = ['Default'];
+
+    function Directive(Default) {
         var directive = {
             restrict: 'A',
             scope: false,
@@ -18,16 +20,20 @@
             var lScope  = controller.getLScope(),
                 markers = lScope.markers;
 
-            lScope.$watch("markers", function (markers) {
-                var markersCoords = [markers.lat, markers.lng];
+            controller.getMap().then(function (map) {
+                var defaultMap = Default.getDefaultMap(attrs.id);
 
-                if(markers.options){
-                    var markersOptions = markers.options;
-                }
+                lScope.$watch("markers", function (markers) {
+                    var markersCoords = [markers.lat, markers.lng];
 
-                var marker = new L.marker(markersCoords, markersOptions);
-                marker.addTo(lScope.map);
-            }, true);
+                    if(markers.options){
+                        var markersOptions = markers.options;
+                    }
+
+                    var marker = new L.marker(markersCoords, markersOptions);
+                    marker.addTo(map);
+                }, true);
+            });
         }
 
         return directive;

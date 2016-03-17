@@ -5,7 +5,9 @@
         .module('angular-leaflet', [])
         .directive('center', Directive);
 
-    function Directive() {
+    Directive.$inject = ['Default'];
+
+    function Directive(Default) {
         var directive = {
             restrict: 'A',
             scope: false,
@@ -15,7 +17,17 @@
         };
 
         function link(scope, element, attrs, controller) {
+            var lScope  = controller.getLScope(),
+                center = lScope.center,
+                zoom = lScope.zoom;
 
+            controller.getLMap().then(function (map) {
+                var defaultMap = Default.getDefaultMap(attrs.id);
+
+                lScope.$watch("center", function (center) {
+                    map.setView([center.lat, center.lng], zoom);
+                }, true);
+            });
         }
 
         return directive;

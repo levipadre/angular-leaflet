@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync').create();
+var $ = require('gulp-load-plugins')();
 
 var conf = {
     app: 'app',
@@ -72,4 +72,4 @@ gulp.task('bower:install', function() {
 });
 
 gulp.task('default', ['browser-sync', 'bower:install', 'scripts:app', 'watch:app'], function() {});
-gulp.task('source', ['browser-sync', 'bower:install', 'scripts:directive', 'scripts:app', 'watch:directive'], function() {});
+gulp.task('source', ['browser-sync', 'bower:install', 'scripts:directive', 'scripts:app', 'watch:'], function() {});

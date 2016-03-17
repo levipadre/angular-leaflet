@@ -1,3 +1,8 @@
+/*!
+ *  angular-leaflet 1.0.0
+ *  git: https://github.com/levipadre/angular-leaflet
+ */
+
 (function(window, angular, undefined) {
     'use strict';
 
@@ -45,7 +50,6 @@
             console.log(attrs);
 
             var map = L.map(mapID, {
-                center: scope.center || defaultMap.center,
                 zoom: scope.zoom,
                 minZoom: scope.minzoom,
                 maxZoom: scope.maxzoom

@@ -20,7 +20,7 @@
             var lScope  = controller.getLScope(),
                 tiles = lScope.tiles;
 
-            controller.getMap().then(function (map) {
+            controller.getLMap().then(function (map) {
                 var defaultMap = Default.getDefaultMap(attrs.id);
 
                 lScope.$watch("tiles", function (tiles) {

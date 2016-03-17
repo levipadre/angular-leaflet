@@ -23,9 +23,9 @@
             },
             template: '<div class="angular-leaflet"><div data-ng-transclude></div></div>',
             controller: ["$scope", function controller($scope) {
-                this._leafletMap = $q.defer();
-                this.getMap = function () {
-                    return this._leafletMap.promise;
+                this._lMap = $q.defer();
+                this.getLMap = function () {
+                    return this._lMap.promise;
                 };
                 this.getLScope = function () {
                     return $scope;
@@ -50,7 +50,7 @@
                 minZoom: scope.minzoom,
                 maxZoom: scope.maxzoom
             });
-            ctrl._leafletMap.resolve(map);
+            ctrl._lMap.resolve(map);
         }
 
         return directive;

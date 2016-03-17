@@ -20,7 +20,7 @@
             var lScope  = controller.getLScope(),
                 markers = lScope.markers;
 
-            controller.getMap().then(function (map) {
+            controller.getLMap().then(function (map) {
                 var defaultMap = Default.getDefaultMap(attrs.id);
 
                 lScope.$watch("markers", function (markers) {

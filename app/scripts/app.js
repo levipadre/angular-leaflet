@@ -23,7 +23,7 @@
 
         $routeProvider.
             when('/', {
-                templateUrl: '../app/scripts/templates/home.html'
+                templateUrl: 'scripts/templates/home.html'
             });
     }
 })(window, window.angular);

@@ -1,12 +1,27 @@
 var gulp = require('gulp');
-var webserver = require('gulp-webserver');
 var $ = require('gulp-load-plugins')();
+var browserSync = require('browser-sync').create();
 
 var conf = {
     app: 'app',
     src: 'src',
     dist: 'dist'
 };
+
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        port: 12345,
+        server: {
+            baseDir: "app",
+            routes:  {
+                '/bower_components': 'bower_components',
+                '/dist': 'dist'
+            },
+            open: true,
+            notify: true
+        }
+    });
+});
 
 gulp.task('scripts:app', function() {
     var files = [
@@ -18,7 +33,10 @@ gulp.task('scripts:app', function() {
         .pipe($.plumber())
         .pipe($.expectFile.real(files))
         .pipe($.concat('app.min.js'))
-        .pipe(gulp.dest(conf.app + '/scripts/min'));
+        .pipe(gulp.dest(conf.app + '/scripts/min'))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 });
 
 gulp.task('scripts:directive', function() {
@@ -32,28 +50,26 @@ gulp.task('scripts:directive', function() {
         .pipe($.expectFile.real(files))
         .pipe($.concat('angular-leaflet.min.js'))
         .pipe($.uglify())
-        .pipe(gulp.dest(conf.dist));
+        .pipe(gulp.dest(conf.dist))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch:app', function() {
+    gulp.watch(conf.app + '/scripts/**/*.js', ['scripts:app']);
+    gulp.watch(conf.app + '/**/*.html', browserSync.reload);
+});
+
+gulp.task('watch:directive', function() {
     gulp.watch(conf.src + '/**/*.js', ['scripts:directive']);
     gulp.watch(conf.app + '/scripts/**/*.js', ['scripts:app']);
-});
-
-gulp.task('webserver', function() {
-    gulp.src('.')
-        .pipe(webserver({
-            livereload: true,
-            port: 12345,
-            directoryListing: false,
-            open: true
-        }));
+    gulp.watch(conf.app + '/**/*.html', browserSync.reload);
 });
 
 gulp.task('bower:install', function() {
     return $.bower();
 });
 
-gulp.task('default', ['webserver', 'bower:install', 'scripts:directive', 'scripts:app', 'watch'], function() {
-
-});
+gulp.task('default', ['browser-sync', 'bower:install', 'scripts:app', 'watch:app'], function() {});
+gulp.task('source', ['browser-sync', 'bower:install', 'scripts:directive', 'scripts:app', 'watch:directive'], function() {});

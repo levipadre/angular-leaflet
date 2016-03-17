@@ -8,7 +8,11 @@
     function Service() {
         var _map = {
             id: 'mapID',
-            center: L.latLng(50.5, 33.5)
+            center: {
+                lat: 0,
+                lng: 0,
+                zoom: 1
+            }
         }
 
         this.getDefaultMap = function(){

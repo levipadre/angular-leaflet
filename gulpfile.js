@@ -10,7 +10,7 @@ var conf = {
 
 gulp.task('browser-sync', function() {
     browserSync.init({
-        port: 12345,
+        port: 54321,
         server: {
             baseDir: "app",
             routes:  {
@@ -72,4 +72,4 @@ gulp.task('bower:install', function() {
 });
 
 gulp.task('default', ['browser-sync', 'bower:install', 'scripts:app', 'watch:app'], function() {});
-gulp.task('source', ['browser-sync', 'bower:install', 'scripts:directive', 'scripts:app', 'watch:'], function() {});
+gulp.task('source', ['browser-sync', 'bower:install', 'scripts:directive', 'scripts:app', 'watch:directive', 'watch:app'], function() {});

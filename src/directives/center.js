@@ -25,7 +25,13 @@
                 var defaultMap = Default.getDefaultMap(attrs.id);
 
                 lScope.$watch("center", function (center) {
-                    map.setView([center.lat, center.lng], zoom);
+                    var defaultCenter = defaultMap.center;
+                    console.log(defaultCenter);
+                    console.log(center);
+                    //angular.copy(center, defaultCenter);
+
+                    map.setView([defaultCenter.lat, defaultCenter.lng], defaultCenter.zoom);
+
                 }, true);
             });
         }

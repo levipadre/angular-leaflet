@@ -73,7 +73,11 @@
             }
         };
 
-        $scope.exampleCenter = L.latLng(50.5, 30.5);
+        $scope.exampleCenter = {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 4
+        };
         $scope.exampleZoom = 6;
         $scope.exampleMaxBounds = $scope.regions.london;
         $scope.exampleTiles = $scope.tilesDict.openstreetmap;

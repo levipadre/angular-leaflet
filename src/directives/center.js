@@ -18,17 +18,19 @@
 
         function link(scope, element, attrs, controller) {
             var lScope  = controller.getLScope(),
-                center = lScope.center,
-                zoom = lScope.zoom;
+                center = lScope.center;
 
             controller.getLMap().then(function (map) {
                 var defaultMap = Default.getDefaultMap(attrs.id);
 
                 lScope.$watch("center", function (center) {
-                    var centerCoords = [center.lat, center.lng],
-                        centerZoom = center.zoom;
+                    var centerCoords = [defaultMap.center['lat'], defaultMap.center['lng']];
+                    var centerZoom = defaultMap.center['zoom'];
 
-                    //angular.copy(center, defaultCenter);
+                    if(typeof center != "undefined"){
+                        centerZoom = angular.copy(center.zoom);
+                        centerCoords = angular.copy([center.lat, center.lng]);
+                    }
 
                     map.setView(centerCoords, centerZoom);
 

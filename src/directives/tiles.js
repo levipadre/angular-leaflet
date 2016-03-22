@@ -24,10 +24,12 @@
                 var defaultMap = Default.getDefaultMap(attrs.id);
 
                 lScope.$watch("tiles", function (tiles) {
-                    var tilesUrl = tiles.url;
+                    var tilesUrl = defaultMap.layer['url'];
+                    var tilesOptions = defaultMap.layer['options'];
 
-                    if(tiles.options){
-                        var tilesOptions = tiles.options;
+                    if(typeof tiles != "undefined"){
+                        tilesUrl = angular.copy(tiles.url);
+                        tilesOptions = angular.copy(tiles.options);
                     }
 
                     var tile = L.tileLayer(tilesUrl, tilesOptions);

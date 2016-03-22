@@ -18,8 +18,8 @@
             replace: true,
             transclude: true,
             scope: {
-                tiles: '=?',
-                center: '=?',
+                tiles: '=',
+                center: '=',
                 markers: '=?',
                 zoom: '=?',
                 minzoom: '=?',
@@ -49,12 +49,23 @@
             console.log('attrs');
             console.log(attrs);
 
-            var map = L.map(mapID, {
-                zoom: scope.zoom,
-                minZoom: scope.minzoom,
-                maxZoom: scope.maxzoom
-            });
+            console.log('ctrl');
+            console.log(ctrl);
+
+            var map = L.map(mapID);
             ctrl._lMap.resolve(map);
+
+            if (typeof attrs.tiles === "undefined") {
+                var defaultLayer = L.tileLayer(defaultMap.layer.url, defaultMap.layer.options);
+                defaultLayer.addTo(map);
+            }
+
+            if (typeof attrs.center === "undefined") {
+                var defaultCenterCoords = [defaultMap.center.lat, defaultMap.center.lng];
+                var defaultCenterZoom = defaultMap.center.zoom;
+
+                map.setView(defaultCenterCoords, defaultCenterZoom);
+            }
         }
 
         return directive;

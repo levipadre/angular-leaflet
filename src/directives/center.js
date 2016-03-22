@@ -28,8 +28,8 @@
                     var centerZoom = defaultMap.center['zoom'];
 
                     if(typeof center != "undefined"){
-                        centerZoom = angular.copy(center.zoom);
                         centerCoords = angular.copy([center.lat, center.lng]);
+                        centerZoom = angular.copy(center.zoom);
                     }
 
                     map.setView(centerCoords, centerZoom);

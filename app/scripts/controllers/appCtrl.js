@@ -11,6 +11,10 @@
         var apikey = 'pk.eyJ1IjoicGhhc2UtaWkiLCJhIjoiNTA5MmExODlhNmE0YWQ5M2Y4NGU0ZTk4YzQwOTJiNWIifQ.RLBMf3gnv2WPRXS6A6bgPg',
             mapid = 'phase-ii.a6x8cy53';
 
+        angular.extend($scope, {
+            id: 'map'
+        });
+
         $scope.tilesDict = {
             openstreetmap: {
                 url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -80,8 +84,20 @@
         };
         $scope.exampleZoom = 6;
         $scope.exampleMaxBounds = $scope.regions.london;
-        $scope.exampleTiles = $scope.tilesDict.openstreetmap;
+        $scope.exampleTiles = $scope.tilesDict.mapbox;
         $scope.exampleMarkers = angular.copy(mainMarker);
+
+        //angular.extend($scope, {
+        //    exampleCenter: {
+        //        lat: 51.505,
+        //        lng: -0.09,
+        //        zoom: 4
+        //    },
+        //    exampleZoom: 6,
+        //    exampleMaxBounds: $scope.regions.london,
+        //    exampleTiles: $scope.tilesDict.mapbox,
+        //    exampleMarkers: angular.copy(mainMarker)
+        //});
 
         var callInit = function(){
 
